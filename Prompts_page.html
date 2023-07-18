@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dropdown Menu Page</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      text-align: center;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    .dropdown {
+      margin-bottom: 20px;
+    }
+
+    .submit-button {
+      background-color: lightblue;
+      padding: 10px 20px;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .selected-words {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body onload = "websocket_init()">
+  <div class="container">
+    <div class="dropdown">
+      <select id="dropdown1">
+        <option value="">Select Word 1</option>
+    <option value="Beautiful">Beautiful</option>
+<option value="Brave">Brave</option>
+<option value="Calm">Calm</option>
+<option value="Delicious">Delicious</option>
+<option value="Elegant">Elegant</option>
+<option value="Funny">Funny</option>
+<option value="Gentle">Gentle</option>
+<option value="Happy">Happy</option>
+<option value="Intelligent">Intelligent</option>
+<option value="Joyful">Joyful</option>
+<option value="Kind">Kind</option>
+<option value="Lovely">Lovely</option>
+<option value="Magical">Magical</option>
+<option value="Peaceful">Peaceful</option>
+<option value="Quiet">Quiet</option>
+<option value="Radiant">Radiant</option>
+<option value="Sunny">Sunny</option>
+<option value="Talented">Talented</option>
+<option value="Vibrant">Vibrant</option>
+<option value="Wise">Wise</option>
+        <!-- Add 19 more options here -->
+      </select>
+    </div>
+    <div class="dropdown">
+      <select id="dropdown2">
+        <option value="">Select Word 2</option>
+         <option value="House">House</option>
+        <option value="City">City</option>
+        <option value="Marilyn Monroe">Marilyn Monroe</option>
+        <option value="Ocean">Ocean</option>
+        <option value="Rockstar">Rockstar</option>
+        <option value="JFK">JFK</option>
+        <option value="Churchill">Churchill</option>
+        <option value="Brooklyn Bridge">Brooklyn Bridge</option>
+       <option value="">Select Word</option>
+      <option value="Beach">Beach</option>
+      <option value="Racecar">Racecar</option>
+      <option value="Jetplane">Jetplane</option>
+      <option value="Astronaut">Astronaut</option>
+      <option value="Hotel Windows">Hotel Windows</option>
+      <option value="Moon">Moon</option>
+      <option value="Clouds">Clouds</option>
+      <option value="Stars">Stars</option>
+      <option value="Ship">Ship</option>
+      <option value="Mountain">Mountain</option>
+      <option value="Flower">Flower</option>
+      <option value="Camera">Camera</option>
+
+
+        <!-- Add 19 more options here -->
+      </select>
+    </div>
+    <div class="dropdown">
+      <select id="dropdown3">
+        <option value="">Select Word 3</option>
+        <option value="Run">Run</option>
+<option value="Jump">Jump</option>
+<option value="Swim">Swim</option>
+<option value="Dance">Dance</option>
+<option value="Sing">Sing</option>
+<option value="Write">Write</option>
+<option value="Read">Read</option>
+<option value="Cook">Cook</option>
+<option value="Play">Play</option>
+<option value="Study">Study</option>
+<option value="Paint">Paint</option>
+<option value="Speak">Speak</option>
+<option value="Solve">Solve</option>
+<option value="Create">Create</option>
+<option value="Explore">Explore</option>
+<option value="Imagine">Imagine</option>
+<option value="Climb">Climb</option>
+<option value="Build">Build</option>
+<option value="Run">Run</option>
+<option value="Cycle">Cycle</option>
+
+        <!-- Add 19 more options here -->
+      </select>
+    </div>
+    <div class="dropdown">
+      <select id="dropdown4">
+        <option value="">In the style of..</option>
+       <option value="Renaissance">Renaissance</option>
+<option value="Impressionism">Impressionism</option>
+<option value="Cubism">Cubism</option>
+<option value="Surrealism">Surrealism</option>
+<option value="Expressionism">Expressionism</option>
+<option value="Abstract Expressionism">Abstract Expressionism</option>
+<option value="Pop Art">Pop Art</option>
+<option value="Minimalism">Minimalism</option>
+<option value="Fauvism">Fauvism</option>
+<option value="Baroque">Baroque</option>
+<option value="Warhol">Warhol</option>
+<option value="Hockney">Hockney</option>
+<option value="Basquiat">Basquiat</option>
+<option value="Keith Haring">Keith Haring</option>
+
+
+        <!-- Add 9 more options here -->
+      </select>
+    </div>
+    <button class="submit-button" onclick="submitForm()">Submit</button>
+    <div class="selected-words" id="selectedWords"></div>
+  </div>
+
+  <script>
+	var ws;
+	function websocket_open(event){
+		console.log('Websocket open')
+	}
+			
+	function websocket_init(){
+		ws = new WebSocket('ws://localhost:9980');
+		ws.onopen = websocket_open;
+	}
+	
+    function submitForm() {
+      var dropdown1 = document.getElementById("dropdown1").value;
+      var dropdown2 = document.getElementById("dropdown2").value;
+      var dropdown3 = document.getElementById("dropdown3").value;
+      var dropdown4 = document.getElementById("dropdown4").value;
+
+      var selectedWords = dropdown1 + " " + dropdown2 + " " + dropdown3 + " " + dropdown4;
+
+      document.getElementById("selectedWords").innerHTML = selectedWords;
+      ws.send(selectedWords);
+    }
+  </script>
+</body>
+</html>
